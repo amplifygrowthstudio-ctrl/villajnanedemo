@@ -1,24 +1,24 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { Language } from '../types';
 import { translations } from '../data/translations';
 import { menuCategories, menuItems } from '../data/menuData';
-import { Search, Sparkles, Star, Leaf, Award, Calendar, Check } from 'lucide-react';
+import { useCart } from '../context/CartContext';
+import { Search, Sparkles, Star, Leaf, Award, Plus, Minus, ShoppingBag } from 'lucide-react';
 
 interface FullMenuSectionProps {
   lang: Language;
   selectedCategoryId?: string;
   onSelectCategory: (catId: string | undefined) => void;
-  onOpenReservation: (dishName?: string) => void;
 }
 
 export default function FullMenuSection({
   lang,
   selectedCategoryId,
   onSelectCategory,
-  onOpenReservation,
 }: FullMenuSectionProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const t = translations[lang];
+  const { addItem, decrementQty, getItemQuantity } = useCart();
 
   // Filter items based on active category and search query
   const filteredItems = useMemo(() => {
@@ -170,15 +170,41 @@ export default function FullMenuSection({
                     </p>
                   </div>
 
-                  {/* Reserve Dish Button */}
+                  {/* Cart Action Button / Stepper */}
                   <div className="pt-3 border-t border-[#F2EDE4] flex items-center justify-between">
-                    <button
-                      onClick={() => onOpenReservation(item.name[lang])}
-                      className="inline-flex items-center gap-2 text-xs font-semibold text-[#1A402D] hover:text-[#D4A373] transition-colors group/btn"
-                    >
-                      <Calendar className="w-3.5 h-3.5 text-[#D4A373]" />
-                      <span>{t.menu.reserveToTaste}</span>
-                    </button>
+                    {getItemQuantity(item.id) === 0 ? (
+                      <button
+                        onClick={() => addItem(item)}
+                        className="inline-flex items-center gap-2 bg-[#1A402D] hover:bg-[#122E20] text-white px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all shadow-xs active:scale-95"
+                      >
+                        <Plus className="w-3.5 h-3.5 text-[#D4A373]" />
+                        <span>{t.cart.addToCart}</span>
+                      </button>
+                    ) : (
+                      <div className="inline-flex items-center gap-3 bg-[#EBF2EE] border border-[#C2D8CB] rounded-full px-3 py-1 text-xs font-semibold text-[#1A402D]">
+                        <button
+                          onClick={() => decrementQty(item.id)}
+                          className="w-6 h-6 rounded-full bg-white hover:bg-[#1A402D] hover:text-white flex items-center justify-center transition-colors text-[#1A402D] shadow-2xs"
+                          aria-label="Decrease quantity"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="font-serif font-bold min-w-[16px] text-center">
+                          {getItemQuantity(item.id)}
+                        </span>
+                        <button
+                          onClick={() => addItem(item)}
+                          className="w-6 h-6 rounded-full bg-[#1A402D] hover:bg-[#122E20] text-white flex items-center justify-center transition-colors shadow-2xs"
+                          aria-label="Increase quantity"
+                        >
+                          <Plus className="w-3 h-3 text-[#D4A373]" />
+                        </button>
+                      </div>
+                    )}
+                    <span className="text-[11px] font-medium text-[#8C7A6B] flex items-center gap-1">
+                      <ShoppingBag className="w-3 h-3 text-[#D4A373]" />
+                      <span>{item.price}</span>
+                    </span>
                   </div>
                 </div>
               </div>

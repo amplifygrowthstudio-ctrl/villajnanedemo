@@ -148,6 +148,25 @@ export interface Translations {
     openMenu: string;
     location: string;
   };
+  cart: {
+    addToCart: string;
+    cartTitle: string;
+    emptyCartTitle: string;
+    emptyCartSubtitle: string;
+    yourOrder: string;
+    subtotal: string;
+    checkoutWhatsApp: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    tableNumberLabel: string;
+    tableNumberPlaceholder: string;
+    phoneLabel: string;
+    phonePlaceholder: string;
+    closeCart: string;
+    clearCart: string;
+    itemAdded: string;
+    requiredNameError: string;
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -298,6 +317,25 @@ export const translations: Record<Language, Translations> = {
       close: "Fermer",
       openMenu: "Ouvrir le menu",
       location: "Rabat, Maroc"
+    },
+    cart: {
+      addToCart: "+ Ajouter",
+      cartTitle: "Votre Commande",
+      emptyCartTitle: "Votre panier est vide",
+      emptyCartSubtitle: "Parcourez notre carte et ajoutez vos créations gourmandes préférées.",
+      yourOrder: "Articles sélectionnés",
+      subtotal: "Sous-total",
+      checkoutWhatsApp: "Commander via WhatsApp",
+      nameLabel: "Nom & Prénom",
+      namePlaceholder: "ex. Yasmine Benali",
+      tableNumberLabel: "N° de table (si sur place)",
+      tableNumberPlaceholder: "ex. Table 12",
+      phoneLabel: "Numéro de téléphone (optionnel)",
+      phonePlaceholder: "+212 6 00 00 00 00",
+      closeCart: "Fermer le panier",
+      clearCart: "Vider le panier",
+      itemAdded: "Ajouté au panier",
+      requiredNameError: "Veuillez indiquer votre nom pour valider la commande."
     }
   },
   ar: {
@@ -447,6 +485,25 @@ export const translations: Record<Language, Translations> = {
       close: "إغلاق",
       openMenu: "فتح القائمة",
       location: "الرباط، المغرب"
+    },
+    cart: {
+      addToCart: "+ إضافة",
+      cartTitle: "طلبيتك",
+      emptyCartTitle: "سلة الطلبات فارغة",
+      emptyCartSubtitle: "استكشف قائمة أطباقنا واضف وجباتك المفضلة.",
+      yourOrder: "الأطباق المختارة",
+      subtotal: "المجموع الفرعي",
+      checkoutWhatsApp: "إرسال الطلب عبر واتساب",
+      nameLabel: "الاسم الكامل",
+      namePlaceholder: "مثال: ياسمين بنعلي",
+      tableNumberLabel: "رقم الطاولة (إذا كنت بالمطعم)",
+      tableNumberPlaceholder: "مثال: طاولة ١٢",
+      phoneLabel: "رقم الهاتف (اختياري)",
+      phonePlaceholder: "+212 6 00 00 00 00",
+      closeCart: "إغلاق السلة",
+      clearCart: "تفريغ السلة",
+      itemAdded: "تمت الإضافة للسلة",
+      requiredNameError: "يرجى إدخال اسمك لإتمام الطلب."
     }
   },
   en: {
@@ -596,6 +653,25 @@ export const translations: Record<Language, Translations> = {
       close: "Close",
       openMenu: "Open Menu",
       location: "Rabat, Morocco"
+    },
+    cart: {
+      addToCart: "+ Add",
+      cartTitle: "Your Order",
+      emptyCartTitle: "Your cart is empty",
+      emptyCartSubtitle: "Explore our menu specialties and add your favorite dishes.",
+      yourOrder: "Selected items",
+      subtotal: "Subtotal",
+      checkoutWhatsApp: "Order via WhatsApp",
+      nameLabel: "Full Name",
+      namePlaceholder: "e.g. Yasmine Benali",
+      tableNumberLabel: "Table No. (if dining in)",
+      tableNumberPlaceholder: "e.g. Table 12",
+      phoneLabel: "Phone Number (optional)",
+      phonePlaceholder: "+212 6 00 00 00 00",
+      closeCart: "Close cart",
+      clearCart: "Clear cart",
+      itemAdded: "Added to cart",
+      requiredNameError: "Please enter your name to complete the order."
     }
   }
 };

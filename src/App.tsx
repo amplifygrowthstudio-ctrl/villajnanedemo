@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Language } from './types';
+import { CartProvider } from './context/CartContext';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import AboutSection from './components/AboutSection';
@@ -11,6 +12,8 @@ import GallerySection from './components/GallerySection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import ReservationModal from './components/ReservationModal';
+import CartButton from './components/CartButton';
+import CartDrawer from './components/CartDrawer';
 
 export default function App() {
   const [lang, setLang] = useState<Language>('fr');
@@ -50,74 +53,79 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-[#2C2825] font-sans antialiased selection:bg-[#D4A373] selection:text-white transition-colors duration-200">
-      {/* 1. Header Component */}
-      <Header
-        lang={lang}
-        onLanguageChange={setLang}
-        onOpenReservation={() => handleOpenReservation()}
-        onNavigateTo={handleNavigateTo}
-      />
-
-      {/* Main Content Area */}
-      <main>
-        {/* 2. Hero Component */}
-        <Hero
+    <CartProvider>
+      <div className="min-h-screen bg-[#FAF8F5] text-[#2C2825] font-sans antialiased selection:bg-[#D4A373] selection:text-white transition-colors duration-200">
+        {/* 1. Header Component */}
+        <Header
           lang={lang}
+          onLanguageChange={setLang}
           onOpenReservation={() => handleOpenReservation()}
-          onNavigateToMenu={() => handleNavigateTo('menu-preview')}
+          onNavigateTo={handleNavigateTo}
         />
 
-        {/* 3. About Section Component */}
-        <AboutSection lang={lang} />
+        {/* Main Content Area */}
+        <main>
+          {/* 2. Hero Component */}
+          <Hero
+            lang={lang}
+            onOpenReservation={() => handleOpenReservation()}
+            onNavigateToMenu={() => handleNavigateTo('menu-preview')}
+          />
 
-        {/* 4. Shaded Garden Terrasse Component */}
-        <TerrasseSection
+          {/* 3. About Section Component */}
+          <AboutSection lang={lang} />
+
+          {/* 4. Shaded Garden Terrasse Component */}
+          <TerrasseSection
+            lang={lang}
+            onOpenReservation={handleOpenReservation}
+          />
+
+          {/* 5. Menu Preview Component */}
+          <MenuPreview
+            lang={lang}
+            onOpenFullMenu={handleOpenFullMenu}
+          />
+
+          {/* 6. Full Filterable Menu Section Component */}
+          <FullMenuSection
+            lang={lang}
+            selectedCategoryId={selectedCategoryId}
+            onSelectCategory={setSelectedCategoryId}
+          />
+
+          {/* 7. Three Pillars Component (Events, Business, Music) */}
+          <ThreePillars
+            lang={lang}
+            onOpenReservation={handleOpenReservation}
+          />
+
+          {/* 8. Gallery Section Component */}
+          <GallerySection lang={lang} />
+
+          {/* 9. Contact & Location Map Section Component */}
+          <ContactSection lang={lang} />
+        </main>
+
+        {/* 10. Global Footer Component */}
+        <Footer
           lang={lang}
-          onOpenReservation={handleOpenReservation}
+          onNavigateTo={handleNavigateTo}
+          onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* 5. Menu Preview Component */}
-        <MenuPreview
-          lang={lang}
-          onOpenFullMenu={handleOpenFullMenu}
+        {/* 11. Floating Shopping Cart Button & Drawer */}
+        <CartButton lang={lang} />
+        <CartDrawer lang={lang} />
+
+        {/* 12. Table Reservation Modal */}
+        <ReservationModal
+          isOpen={isReservationOpen}
+          onClose={() => setIsReservationOpen(false)}
+          currentLang={lang}
+          initialPreselectedItem={preselectedItem}
         />
-
-        {/* 6. Full Filterable Menu Section Component */}
-        <FullMenuSection
-          lang={lang}
-          selectedCategoryId={selectedCategoryId}
-          onSelectCategory={setSelectedCategoryId}
-          onOpenReservation={handleOpenReservation}
-        />
-
-        {/* 7. Three Pillars Component (Events, Business, Music) */}
-        <ThreePillars
-          lang={lang}
-          onOpenReservation={handleOpenReservation}
-        />
-
-        {/* 8. Gallery Section Component */}
-        <GallerySection lang={lang} />
-
-        {/* 9. Contact & Location Map Section Component */}
-        <ContactSection lang={lang} />
-      </main>
-
-      {/* 10. Global Footer Component */}
-      <Footer
-        lang={lang}
-        onNavigateTo={handleNavigateTo}
-        onOpenReservation={() => handleOpenReservation()}
-      />
-
-      {/* 11. Table Reservation Modal */}
-      <ReservationModal
-        isOpen={isReservationOpen}
-        onClose={() => setIsReservationOpen(false)}
-        currentLang={lang}
-        initialPreselectedItem={preselectedItem}
-      />
-    </div>
+      </div>
+    </CartProvider>
   );
 }
