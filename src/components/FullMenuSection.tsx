@@ -65,10 +65,10 @@ export default function FullMenuSection({
         {/* Filter Controls Bar (Category Pills + Search Box) */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 mb-12 bg-white p-4 sm:p-6 rounded-3xl border border-[#E8E2D9] shadow-xs">
           {/* Category Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 scrollbar-none">
+          <div className="flex items-center gap-2 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 no-scrollbar touch-pan-x">
             <button
               onClick={() => onSelectCategory(undefined)}
-              className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all shrink-0 ${
+              className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all shrink-0 whitespace-nowrap ${
                 !selectedCategoryId
                   ? 'bg-[#1A402D] text-white shadow-xs'
                   : 'bg-[#F2EDE4] text-[#665A4E] hover:text-[#2C2825] hover:bg-[#E8E2D9]'
@@ -81,7 +81,7 @@ export default function FullMenuSection({
               <button
                 key={cat.id}
                 onClick={() => onSelectCategory(cat.id)}
-                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all shrink-0 ${
+                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all shrink-0 whitespace-nowrap ${
                   selectedCategoryId === cat.id
                     ? 'bg-[#1A402D] text-white shadow-xs'
                     : 'bg-[#F2EDE4] text-[#665A4E] hover:text-[#2C2825] hover:bg-[#E8E2D9]'
